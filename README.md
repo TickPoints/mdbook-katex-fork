@@ -1,4 +1,11 @@
-# mdBook-KaTeX
+# mdBook-KaTeX Fork
+
+> Temporary fork notice
+>
+> This repository is a temporary fork of the original `mdbook-katex` project.
+> It exists to carry local fixes and maintenance updates after the original
+> project became inactive. This fork may not receive continuous long-term
+> updates, and there is no guarantee of sustained maintenance.
 
 [![Crates.io version](https://img.shields.io/crates/v/mdbook-katex)](https://crates.io/crates/mdbook-katex)
 ![Crates.io downloads](https://img.shields.io/crates/d/mdbook-katex)
@@ -256,4 +263,3 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 ```
-

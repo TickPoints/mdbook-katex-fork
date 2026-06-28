@@ -1,12 +1,12 @@
 use clap::{crate_version, Arg, ArgMatches, Command};
-use mdbook_katex::{init_tracing, preprocess::KatexProcessor};
+use mdbook_katex_fork::{init_tracing, preprocess::KatexProcessor};
 use mdbook_preprocessor::errors::{Error, Result};
 use mdbook_preprocessor::Preprocessor;
 use std::io;
 
 /// Parse CLI options.
 pub fn make_app() -> Command {
-    Command::new("mdbook-katex")
+    Command::new("mdbook-katex-fork")
         .version(crate_version!())
         .about("A preprocessor that renders KaTex equations to HTML.")
         .subcommand(

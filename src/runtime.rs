@@ -44,7 +44,7 @@ impl<'a> MdBookRuntime<'a> {
     pub fn emit_compatibility_warning(&self) {
         if self.ctx.mdbook_version != mdbook_preprocessor::MDBOOK_VERSION {
             warn!(
-                "This mdbook-katex was built against mdbook v{}, but we are being called from mdbook v{}. If you have any issue, this might be a reason.",
+                "This mdbook-katex-fork was built against mdbook v{}, but we are being called from mdbook v{}. If you have any issue, this might be a reason.",
                 mdbook_preprocessor::MDBOOK_VERSION,
                 self.ctx.mdbook_version,
             );

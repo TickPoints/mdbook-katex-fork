@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- rename crate/binary from `mdbook-katex` to `mdbook-katex-fork`
+- release fork line as version `0.10.0`
+- update in-code program identifiers and repository links to the fork namespace
+
 ## [0.10.0](https://github.com/lzanini/mdbook-katex/compare/v0.9.4...v0.10.0) - 2025-11-28
 
 ### Other
