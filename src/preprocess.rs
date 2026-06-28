@@ -1,5 +1,6 @@
 //! Preprocessing and escaping with KaTeX.
 use super::*;
+use crate::runtime::MdBookRuntime;
 
 /// When `pre-render` is called but not enabled.
 #[cfg(not(feature = "pre-render"))]
@@ -37,30 +38,28 @@ impl Preprocessor for KatexProcessor {
         "katex"
     }
 
-    fn run(&self, ctx: &PreprocessorContext, mut book: Book) -> Result<Book> {
-        // parse TOML config
-        let cfg = get_config(&ctx.config)?;
-        let header = if cfg.no_css { "" } else { KATEX_HEADER }.to_owned();
+    fn run(&self, ctx: &PreprocessorContext, book: Book) -> Result<Book> {
+        let mut runtime = MdBookRuntime::new(ctx, book)?;
+        runtime.emit_compatibility_warning();
+        let header = runtime.stylesheet_header();
 
-        if cfg.pre_render {
-            process_all_chapters_prerender(&mut book, &cfg, &header, ctx);
+        if runtime.cfg().pre_render {
+            process_all_chapters_prerender(&mut runtime, &header);
         } else {
-            process_all_chapters_escape(&mut book, &cfg, &header, ctx);
+            process_all_chapters_escape(&mut runtime, &header);
         }
-        Ok(book)
+        Ok(runtime.into_book())
     }
 }
 
 /// Escape all Katex equations.
 pub fn process_all_chapters_escape(
-    book: &mut Book,
-    cfg: &KatexConfig,
+    runtime: &mut MdBookRuntime<'_>,
     stylesheet_header: &str,
-    _: &PreprocessorContext,
 ) {
-    let extra_opts = cfg.build_extra_opts();
-    book.for_each_chapter_mut(|chapter| {
-        chapter.content = process_chapter_escape(&chapter.content, &extra_opts, stylesheet_header);
+    let extra_opts = runtime.cfg().build_extra_opts();
+    runtime.map_chapters_parallel(|chapter| {
+        process_chapter_escape(&chapter.content, &extra_opts, stylesheet_header)
     });
 }
 

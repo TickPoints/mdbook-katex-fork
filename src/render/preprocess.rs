@@ -2,25 +2,24 @@
 use katex::Opts;
 
 use super::*;
+use crate::runtime::MdBookRuntime;
 
 /// Render all Katex equations.
 pub fn process_all_chapters_prerender(
-    book: &mut Book,
-    cfg: &KatexConfig,
+    runtime: &mut MdBookRuntime<'_>,
     stylesheet_header: &str,
-    ctx: &PreprocessorContext,
 ) {
-    let extra_opts = cfg.build_extra_opts();
-    let (inline_opts, display_opts) = cfg.build_opts(&ctx.root);
+    let extra_opts = runtime.cfg().build_extra_opts();
+    let (inline_opts, display_opts) = runtime.cfg().build_opts(&runtime.ctx().root);
 
-    book.for_each_chapter_mut(|chapter| {
-        chapter.content = process_chapter_prerender(
+    runtime.map_chapters_parallel(|chapter| {
+        process_chapter_prerender(
             &chapter.content,
             inline_opts.clone(),
             display_opts.clone(),
             stylesheet_header,
             &extra_opts,
-        );
+        )
     });
 }
 

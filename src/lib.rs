@@ -26,6 +26,7 @@ use {
 pub mod cfg;
 pub mod escape;
 pub mod preprocess;
+pub mod runtime;
 pub mod scan;
 
 #[cfg(feature = "pre-render")]
