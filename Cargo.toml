@@ -2,6 +2,7 @@
 name = "mdbook-katex-fork"
 version = "0.10.0"
 authors = [
+    "TickPoints <tickpoints@outlook.com>",
     "Lucas Zanini <zanini.lcs@gmail.com>",
     "Steven Hé (Sīchàng) <stevensichanghe@gmail.com>",
 ]
