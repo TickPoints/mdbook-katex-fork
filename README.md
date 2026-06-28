@@ -50,7 +50,7 @@ Another way is [Escape mode](#escape-mode-experimental).
 Then, add the following line to your `book.toml` file
 
 ```toml
-[preprocessor.katex]
+[preprocessor.katex-fork]
 after = ["links"]
 ```
 
